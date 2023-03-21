@@ -9,25 +9,15 @@ public class Util {
     private static final String URL = "jdbc:mysql://localhost:3306/task_1_1_4_db";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-    private static Connection connection;
-    public static Connection getConnection() /*throws SQLException */{
-        if (connection == null) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-            } catch (ClassNotFoundException | SQLException ex) {
-                //throw new SQLException("Unable to connect");
-                ex.printStackTrace();
-            }
-        }
-        return connection;
-    }
 
-    public static void disconnect() {
+    public static Connection getConnection() {
+        Connection connection = null;
         try {
-            connection.close();
-        } catch (SQLException ex) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
+        return connection;
     }
 }
